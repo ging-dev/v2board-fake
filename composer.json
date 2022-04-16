@@ -2,9 +2,15 @@
     "require": {
         "workerman/workerman": "^4.0",
         "react/http": "^1.6",
-        "clue/framework-x": "dev-main"
+        "clue/framework-x": "dev-main",
+        "react/filesystem": "^0.1.2"
     },
     "require-dev": {
         "vimeo/psalm": "^4.22"
+    },
+    "config": {
+        "allow-plugins": {
+            "wyrihaximus/composer-update-bin-autoload-path": true
+        }
     }
 }

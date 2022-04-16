@@ -3,6 +3,8 @@
 use FrameworkX\App;
 use FrameworkX\FilesystemHandler;
 use Psr\Http\Message\ServerRequestInterface;
+use React\EventLoop\Loop;
+use React\Filesystem\Filesystem;
 use React\Http\Message\Response;
 use Workerman\Events\React\StreamSelectLoop;
 use Workerman\Worker;
@@ -28,9 +30,37 @@ $worker->onWorkerStart = function (): void {
 
     $app->get('/api/v1/server/Deepbwork/user', new FilesystemHandler(__DIR__.'/user.json'));
 
-    $app->post('/api/v1/server/Deepbwork/user', function (ServerRequestInterface $req) {
-        echo $req->getBody()->getContents();
-        // $data = json_decode($req->getBody()->getContents(), true);
+    $app->post('/api/v1/server/Deepbwork/submit', function (ServerRequestInterface $req) {
+        Filesystem::create(Loop::get())->file(__DIR__.'/dump.json')->putContents($req->getBody()->getContents());
+
+        return Response::plaintext('OK');
+    });
+
+    $app->get('/subscribe/{type}', function (ServerRequestInterface $req) {
+        /** @var string */
+        $type = $req->getAttribute('type');
+
+        $host = match ($type) {
+            'vinaphone' => 'mytunes.vinaphone.com.vn',
+            'vietnamobile' => 'vietnamobile.com.vn',
+            default => 'livestream2.tv360.vn',
+        };
+
+        $data = [
+            'v' => 2,
+            'ps' => 'Gingdev VPN',
+            'add' => '20.212.56.43',
+            'port' => 80,
+            'id' => '13d87da5-f51b-4587-8892-6edb121ff5c9',
+            'aid' => 0,
+            'net' => 'ws',
+            'type' => 'none',
+            'host' => $host,
+            'path' => '/',
+            'tls' => '',
+        ];
+
+        return Response::plaintext('vmess://'.base64_encode(json_encode($data)).PHP_EOL);
     });
 
     $app->run();
