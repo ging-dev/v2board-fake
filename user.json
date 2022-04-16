@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "t": 0,
+            "u": 0,
+            "d": 0,
+            "transfer_enable": 10737417166258176,
+            "v2ray_user": {
+                "uuid": "13d87da5-f51b-4587-8892-6edb121ff5c9",
+                "email": "13d87da5-f51b-4587-8892-6edb121ff5c9@ging.dev",
+                "alter_id": 0,
+                "level": 0
+            }
+        }
+    ]
+}

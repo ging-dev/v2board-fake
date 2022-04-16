@@ -1,0 +1,10 @@
+{
+    "require": {
+        "workerman/workerman": "^4.0",
+        "react/http": "^1.6",
+        "clue/framework-x": "dev-main"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^4.22"
+    }
+}
