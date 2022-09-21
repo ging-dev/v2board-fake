@@ -13,8 +13,6 @@ use Workerman\Worker;
 
 require __DIR__.'/vendor/autoload.php';
 
-$_SERVER['X_LISTEN'] = '0.0.0.0:8000';
-
 $worker = new Worker();
 
 // Setting

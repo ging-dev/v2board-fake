@@ -25,6 +25,6 @@ class SubscribeController
             'tls'  => '',
         ];
 
-        return Response::plaintext('vmess://'.base64_encode(json_encode($data)).PHP_EOL);
+        return Response::plaintext(base64_encode('vmess://'.base64_encode(json_encode($data)).PHP_EOL));
     }
 }
